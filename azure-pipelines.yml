@@ -1,97 +1,42 @@
-nodes:
-  - id: A
-    label: Start
-    type: start
-  - id: B
-    label: Data Input
-    type: decision
-  - id: C
-    label: Student Info
-    type: process
-  - id: D
-    label: Subject Marks
-    type: process
-  - id: E
-    label: Validate Data
-    type: process
-  - id: F
-    label: Store Data
-    type: process
-  - id: G
-    label: Error Msg
-    type: process
-  - id: H
-    label: Calc Results?
-    type: decision
-  - id: I
-    label: Calc Total & %
-    type: process
-  - id: J
-    label: Calc Grade
-    type: process
-  - id: K
-    label: Report Card
-    type: process
-  - id: L
-    label: Store Report
-    type: process
-  - id: M
-    label: Class/Sub Reports?
-    type: decision
-  - id: N
-    label: Gen Reports
-    type: process
-  - id: O
-    label: Display/Export
-    type: process
-  - id: P
-    label: End
-    type: end
+trigger:
+- main
 
-edges:
-  - from: A
-    to: B
-  - from: B
-    to: C
-  - from: B
-    to: D
-  - from: C
-    to: E
-  - from: D
-    to: E
-  - from: E
-    to: F
-    label: Valid
-  - from: E
-    to: G
-    label: Invalid
-  - from: G
-    to: B
-  - from: F
-    to: H
-  - from: H
-    to: I
-    label: Yes
-  - from: I
-    to: J
-  - from: J
-    to: K
-  - from: K
-    to: L
-  - from: H
-    to: L
-    label: No
-  - from: L
-    to: M
-  - from: M
-    to: N
-    label: Yes
-  - from: N
-    to: O
-  - from: M
-    to: O
-    label: No
-  - from: O
-    to: P
-  - from: F
-    to: M
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo "Starting Student Mark Management System Pipeline"
+  displayName: 'Start Pipeline'
+
+- script: |
+    echo "Data Input: Student Info and Subject Marks"
+  displayName: 'Data Input'
+
+- script: |
+    echo "Validate Data"
+  displayName: 'Validate Data'
+
+- script: |
+    echo "Store Data in Database"
+  displayName: 'Store Data'
+
+- script: |
+    echo "Calculate Results (if needed)"
+  displayName: 'Calculate Results'
+
+- script: |
+    echo "Generate Student Report Card (if needed)"
+  displayName: 'Generate Report'
+
+- script: |
+    echo "Generate Class/Subject Reports (if needed)"
+  displayName: 'Generate Class Reports'
+
+- script: |
+    echo "Display/Export Reports"
+  displayName: 'Display Reports'
+
+- script: |
+    echo "Pipeline Complete"
+  displayName: 'End Pipeline'
